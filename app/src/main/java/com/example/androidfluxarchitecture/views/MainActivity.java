@@ -5,13 +5,19 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.androidfluxarchitecture.R;
+import com.example.androidfluxarchitecture.actions.ActionCreator;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import javax.inject.Inject;
+
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    ActionCreator actionCreator;
 
     @ViewById(R.id.editTextLanguage)
     EditText editTextLanguage;
@@ -26,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         String language = editTextLanguage.getText().toString();
         if (!language.isEmpty()) {
             editTextLanguage.setText("");
-            //action
+            actionCreator.createGetRepositoriesByLanguageAction(language);
         }
     }
 }
