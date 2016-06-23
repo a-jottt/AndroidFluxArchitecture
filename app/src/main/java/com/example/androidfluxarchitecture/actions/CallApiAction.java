@@ -19,7 +19,7 @@ public class CallApiAction implements Action {
     }
 
     @Override
-    public ActionType getType() {
+    public ActionTypes getType() {
         return type;
     }
 
