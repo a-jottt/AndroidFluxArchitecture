@@ -37,4 +37,11 @@
         android:layout_below="@+id/textView"
         android:layout_toRightOf="@+id/editTextLanguage"
         android:layout_toEndOf="@+id/editTextLanguage" />
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/buttonSearch"/>
 </RelativeLayout>

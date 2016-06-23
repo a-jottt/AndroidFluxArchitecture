@@ -1,7 +1,10 @@
 package com.example.androidfluxarchitecture.views;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.example.androidfluxarchitecture.R;
@@ -10,6 +13,7 @@ import com.example.androidfluxarchitecture.app.BaseApplication;
 import com.example.androidfluxarchitecture.data.RepositoriesList;
 import com.example.androidfluxarchitecture.models.Repository;
 import com.example.androidfluxarchitecture.stores.RepositoryStore;
+import com.example.androidfluxarchitecture.views.adapters.RepositoryListAdapter;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -21,6 +25,8 @@ import javax.inject.Inject;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
+
+    private Context mContext;
 
     @Inject
     EventBus eventBus;
@@ -34,10 +40,14 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.editTextLanguage)
     EditText editTextLanguage;
 
+    @ViewById(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((BaseApplication) getApplication()).component().inject(this);
+        mContext = this;
     }
 
     @Override
@@ -64,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onRepositoryListUpdated(RepositoriesList repositoriesList) {
-        for (Repository repository: repositoriesList.getRepositories()) {
-        }
+        RepositoryListAdapter adapter = new RepositoryListAdapter(repositoriesList.getRepositories(), mContext);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }
 }

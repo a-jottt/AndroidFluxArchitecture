@@ -38,7 +38,7 @@ public class RepositoryListAdapter extends RecyclerView.Adapter<RepositoryListAd
 
         holder.textViewTitle.setText(repository.getFull_name());
         holder.textViewDescription.setText(repository.getDescription());
-        holder.textViewStars.setText(repository.getStargazers_count());
+        holder.textViewStars.setText(String.valueOf(repository.getStargazers_count()));
 
 //        holder.itemView.setOnClickListener(clickListener);
     }
