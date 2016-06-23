@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.androidfluxarchitecture.app.modules.ApplicationModule;
 import com.example.androidfluxarchitecture.app.modules.RestServicesModule;
+import com.example.androidfluxarchitecture.stores.RepositoryStore;
 
 import javax.inject.Singleton;
 
@@ -18,6 +19,7 @@ public class BaseApplication extends Application {
     @Component(modules = {RestServicesModule.class, ApplicationModule.class})
     public interface ApplicationComponent {
         void inject(BaseApplication application);
+        void inject (RepositoryStore repositoryStore);
     }
     private ApplicationComponent component;
 
