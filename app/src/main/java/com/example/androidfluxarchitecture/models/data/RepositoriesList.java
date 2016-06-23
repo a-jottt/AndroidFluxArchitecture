@@ -1,4 +1,4 @@
-package com.example.androidfluxarchitecture.data;
+package com.example.androidfluxarchitecture.models.data;
 
 import com.example.androidfluxarchitecture.models.Repository;
 

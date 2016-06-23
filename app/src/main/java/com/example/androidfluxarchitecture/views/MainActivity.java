@@ -10,8 +10,7 @@ import android.widget.EditText;
 import com.example.androidfluxarchitecture.R;
 import com.example.androidfluxarchitecture.actions.ActionCreator;
 import com.example.androidfluxarchitecture.app.BaseApplication;
-import com.example.androidfluxarchitecture.data.RepositoriesList;
-import com.example.androidfluxarchitecture.models.Repository;
+import com.example.androidfluxarchitecture.models.data.RepositoriesList;
 import com.example.androidfluxarchitecture.stores.RepositoryStore;
 import com.example.androidfluxarchitecture.views.adapters.RepositoryListAdapter;
 

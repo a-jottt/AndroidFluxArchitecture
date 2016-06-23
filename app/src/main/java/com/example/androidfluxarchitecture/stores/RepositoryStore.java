@@ -5,7 +5,7 @@ import com.example.androidfluxarchitecture.actions.CallApiAction;
 import com.example.androidfluxarchitecture.actions.DataBundle;
 import com.example.androidfluxarchitecture.actions.DataKeys;
 import com.example.androidfluxarchitecture.app.services.RepositoryService;
-import com.example.androidfluxarchitecture.data.RepositoriesList;
+import com.example.androidfluxarchitecture.models.data.RepositoriesList;
 import com.example.androidfluxarchitecture.models.Repository;
 import com.example.androidfluxarchitecture.models.RepositoryQueryData;
 
