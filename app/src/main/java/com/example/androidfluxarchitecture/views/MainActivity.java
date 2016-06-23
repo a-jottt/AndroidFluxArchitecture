@@ -1,15 +1,21 @@
 package com.example.androidfluxarchitecture.views;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 import com.example.androidfluxarchitecture.R;
 import com.example.androidfluxarchitecture.actions.ActionCreator;
+import com.example.androidfluxarchitecture.app.BaseApplication;
+import com.example.androidfluxarchitecture.data.RepositoriesList;
+import com.example.androidfluxarchitecture.models.Repository;
+import com.example.androidfluxarchitecture.stores.RepositoryStore;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
@@ -17,7 +23,13 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
 
     @Inject
+    EventBus eventBus;
+
+    @Inject
     ActionCreator actionCreator;
+
+    @Inject
+    RepositoryStore repositoryStore;
 
     @ViewById(R.id.editTextLanguage)
     EditText editTextLanguage;
@@ -25,6 +37,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((BaseApplication) getApplication()).component().inject(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        repositoryStore.onPause();
+        eventBus.unregister(this);
+        super.onStop();
     }
 
     @Click(R.id.buttonSearch)
@@ -33,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
         if (!language.isEmpty()) {
             editTextLanguage.setText("");
             actionCreator.createGetRepositoriesByLanguageAction(language);
+        }
+    }
+
+    @Subscribe
+    public void onRepositoryListUpdated(RepositoriesList repositoriesList) {
+        for (Repository repository: repositoriesList.getRepositories()) {
         }
     }
 }

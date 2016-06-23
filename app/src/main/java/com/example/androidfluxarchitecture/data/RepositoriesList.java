@@ -19,4 +19,8 @@ public class RepositoriesList {
         this.repositories = new ArrayList<Repository>();
         this.repositories.addAll(list);
     }
+
+    public ArrayList<Repository> getRepositories() {
+        return repositories;
+    }
 }

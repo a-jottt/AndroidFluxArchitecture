@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.androidfluxarchitecture.app.modules.ApplicationModule;
 import com.example.androidfluxarchitecture.app.modules.RestServicesModule;
 import com.example.androidfluxarchitecture.stores.RepositoryStore;
+import com.example.androidfluxarchitecture.views.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -20,6 +21,7 @@ public class BaseApplication extends Application {
     public interface ApplicationComponent {
         void inject(BaseApplication application);
         void inject (RepositoryStore repositoryStore);
+        void inject (MainActivity mainActivity);
     }
     private ApplicationComponent component;
 
