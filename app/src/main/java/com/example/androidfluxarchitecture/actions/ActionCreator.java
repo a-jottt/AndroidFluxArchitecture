@@ -2,8 +2,6 @@ package com.example.androidfluxarchitecture.actions;
 
 import org.greenrobot.eventbus.EventBus;
 
-import javax.inject.Inject;
-
 /**
  * Created by joanna on 22.06.16.
  */
@@ -11,7 +9,6 @@ public class ActionCreator {
 
     private EventBus eventBus;
 
-    @Inject
     public ActionCreator(EventBus eventBus) {
         this.eventBus = eventBus;
     }

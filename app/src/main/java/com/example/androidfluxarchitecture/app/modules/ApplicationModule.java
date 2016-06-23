@@ -1,6 +1,9 @@
 package com.example.androidfluxarchitecture.app.modules;
 
-import com.example.androidfluxarchitecture.app.BaseApplication;
+import android.app.Application;
+import android.content.Context;
+
+import com.example.androidfluxarchitecture.actions.ActionCreator;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -15,21 +18,29 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final BaseApplication baseApplication;
+    Application application;
+    Context context;
 
-    public ApplicationModule(BaseApplication baseApplication) {
-        this.baseApplication = baseApplication;
+    public ApplicationModule(Application app) {
+        this.application = app;
+        this.context = app.getApplicationContext();
     }
 
     @Provides
     @Singleton
-    BaseApplication provideBaseApplication() {
-        return baseApplication;
+    ActionCreator provideActionCreator() {
+        return new ActionCreator(provideEventBus());
     }
 
     @Provides
     @Singleton
-    EventBus provideEventBus() {
+    public Application provideApplication() {
+        return application;
+    }
+
+    @Provides
+    @Singleton
+    public EventBus provideEventBus() {
         return EventBus.getDefault();
     }
 }
