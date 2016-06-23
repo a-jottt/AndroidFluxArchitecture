@@ -1,13 +1,9 @@
 package com.example.androidfluxarchitecture.stores;
 
-import android.util.Log;
-
-import com.example.androidfluxarchitecture.actions.ActionType;
 import com.example.androidfluxarchitecture.actions.ActionTypes;
 import com.example.androidfluxarchitecture.actions.CallApiAction;
 import com.example.androidfluxarchitecture.actions.DataBundle;
 import com.example.androidfluxarchitecture.actions.DataKeys;
-import com.example.androidfluxarchitecture.app.BaseApplication;
 import com.example.androidfluxarchitecture.app.services.RepositoryService;
 import com.example.androidfluxarchitecture.data.RepositoriesList;
 import com.example.androidfluxarchitecture.models.Repository;
@@ -17,7 +13,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -31,18 +26,14 @@ import rx.schedulers.Schedulers;
 public class RepositoryStore {
 
     private ArrayList<Repository> repositories;
-
-    @Inject
-    BaseApplication baseApplication;
+    private EventBus eventBus;
 
     @Inject
     RepositoryService repositoryService;
 
     @Inject
-    EventBus eventBus;
-
-    public RepositoryStore() {
-        baseApplication.component().inject(this);
+    public RepositoryStore(EventBus eventBus) {
+        this.eventBus = eventBus;
         eventBus.register(this);
         repositories = new ArrayList<>();
     }
@@ -52,7 +43,7 @@ public class RepositoryStore {
     }
 
     @Subscribe
-    public final void reactToCallApiAction(CallApiAction action) {
+    public final void onCallApiAction(CallApiAction action) {
         DataBundle<DataKeys> data = action.getData();
         String language = (String) data.get(DataKeys.REPO_LANGUAGE, -1);
         ActionTypes actionType = action.getType();
