@@ -24,7 +24,7 @@ public class CallApiAction implements Action {
     }
 
     @Override
-    public DataBundle getData() {
+    public DataBundle<DataKeys> getData() {
         return bundle;
     }
 }
