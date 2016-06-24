@@ -5,7 +5,7 @@ import com.example.androidfluxarchitecture.actions.CallApiAction;
 import com.example.androidfluxarchitecture.actions.DataBundle;
 import com.example.androidfluxarchitecture.actions.DataKeys;
 import com.example.androidfluxarchitecture.app.services.RepositoryService;
-import com.example.androidfluxarchitecture.models.data.RepositoriesList;
+import com.example.androidfluxarchitecture.data.RepositoriesList;
 import com.example.androidfluxarchitecture.models.Repository;
 import com.example.androidfluxarchitecture.models.RepositoryQueryData;
 
@@ -25,8 +25,8 @@ import rx.schedulers.Schedulers;
  */
 public class RepositoryStore {
 
-    private ArrayList<Repository> repositories;
-    private EventBus eventBus;
+    public ArrayList<Repository> repositories;
+    public EventBus eventBus;
 
     @Inject
     RepositoryService repositoryService;
