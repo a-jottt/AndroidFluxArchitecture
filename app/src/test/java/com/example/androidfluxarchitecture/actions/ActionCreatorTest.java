@@ -29,11 +29,13 @@ public class ActionCreatorTest {
 
     public static EventBus eventBus;
     public static ActionCreator actionCreator;
+    public static String language;
 
     @BeforeClass
     public static void setup() {
         eventBus = EventBus.getDefault();
         actionCreator = new ActionCreator(eventBus);
+        language = "test";
     }
 
     @Test
@@ -42,15 +44,19 @@ public class ActionCreatorTest {
 
         eventBus.register(new TestSubscribers().setTestDone(testDone));
 
-        actionCreator.createGetRepositoriesByLanguageAction("java");
+        actionCreator.createGetRepositoriesByLanguageAction(getLanguage());
 
         while (!testDone.get()) ;
+    }
+
+    public static String getLanguage() {
+        return language;
     }
 
     public class TestSubscribers extends SubscribeBase {
         @Subscribe
         public void getRepositoriesByLanguage(CallApiAction action) {
-            assertThat(action.getData().get(DataKeys.REPO_LANGUAGE, "")).isEqualTo("java");
+            assertThat(action.getData().get(DataKeys.REPO_LANGUAGE, "")).isEqualTo(ActionCreatorTest.getLanguage());
             testDone.set(true);
         }
     }
